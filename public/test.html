@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		Очерёдность пунктов поменял ввиду того, что чтобы добавить товар нужно сначала создать запись с брендом в базе.
+		<h3>ТЗ - пункт 3</h3>
+		<form action="gate.php/brend" method="POST">
+			<input type="text" name="brend_name" value="" placeholder="Введите имя бренда">
+			<input type="submit" value="Добавить новый бренд в каталог">
+		</form>
+		<hr>
+		<h3>ТЗ - пункт 4</h3>
+		<form action="gate.php/brend" method="POST">
+			<input type="hidden" name="_method" value="DELETE">
+			<select name="brend_id">
+				<option disabled selected value="">- Выберите бренд для удаления -</option>
+				<?
+				if(($brend_list = $sklad->get_brend_list()) !== FALSE AND
+					count($brend_list) > 0)
+					{
+					foreach($brend_list as $brend)
+						{
+						echo '<option value="'.$brend['brend_id'].'">'.$brend['brend_name'].'</option>';
+						}
+					}
+				?>
+			</select>
+			<input type="submit" value="Удалить бренд из каталога">
+		</form>
+		<hr>
+		<h3>ТЗ - пункт 1</h3>
+		<form action="gate.php/item" method="POST">
+			<input type="text" name="item_title" value="" placeholder="Введите наименование товара"><br>
+			<input type="text" name="item_price" value="" placeholder="Введите цену товара"><br>
+			<input type="text" name="item_short_description" value="" placeholder="Введите опсание товара"><br>
+			<select name="brend_id">
+				<option disabled selected value="">- Выберите бренд для данного товара -</option>
+				<?
+				if(($brend_list = $sklad->get_brend_list()) !== FALSE AND
+					count($brend_list) > 0)
+					{
+					foreach($brend_list as $brend)
+						{
+						echo '<option value="'.$brend['brend_id'].'">'.$brend['brend_name'].'</option>';
+						}
+					}
+				?>
+			</select>
+			<input type="submit" value="Добавить новый товар в каталог">
+		</form>
+		<hr>
+		<h3>ТЗ - пункт 2</h3>
+		<form action="gate.php/item" method="POST">
+			<input type="hidden" name="_method" value="DELETE">
+			<select name="item_id">
+				<option disabled selected value="">- Выберите товар для удаления -</option>
+				<?
+				if(($item_list = $sklad->get_item_list()) !== FALSE AND
+					count($item_list) > 0)
+					{
+					foreach($item_list as $item)
+						{
+						echo '<option value="'.$item['item_id'].'">'.$item['item_title'].'</option>';
+						}
+					}
+				?>
+			</select>
+			<input type="submit" value="Удалить бренд из каталога">
+		</form>
+		<hr>
+		<h3>ТЗ - пункт 5</h3>
+		<form id="brend_min" action="gate.php/brend_min" method="GET" onsubmit="return brend_min_submit();">
+			<input type="text" id="brend_min_items" placeholder="Введите минимальное количество товара у бренда">
+			<input type="submit" value="Показать бренды из каталога">
+		</form>
+		<hr>
+		<h3>ТЗ - пункт 6</h3>
+		<form id="brend_items" action="gate.php/brend_items" method="GET" onsubmit="return brend_items_submit();">
+			<select id="brend_id">
+				<option disabled selected value="">- Выберите бренд товара -</option>
+				<?
+				if(($brend_list = $sklad->get_brend_list()) !== FALSE AND
+					count($brend_list) > 0)
+					{
+					foreach($brend_list as $brend)
+						{
+						echo '<option value="'.$brend['brend_id'].'">'.$brend['brend_name'].'</option>';
+						}
+					}
+				?>
+			</select>
+			<input type="submit" value="Показать товар этого бренда">
+		</form>
+		<hr>
+	</body>
+</html>
