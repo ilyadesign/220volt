@@ -77,7 +77,7 @@ class GoodsController extends Controller
     public function show(Goods $goods)
     {
         //
-        $goods = DB::select('SELECT * FROM vendors, goods WHERE vendors.id = ? GROUP BY goods.i', $brand);
+        $goods = DB::select('SELECT * FROM vendors, goods WHERE vendors.id = ? GROUP BY goods.id', $brand);
         return view('index', ['goods' => $goods]);
     }
 
