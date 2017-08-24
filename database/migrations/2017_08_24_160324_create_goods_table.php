@@ -23,6 +23,7 @@ class CreateGoodsTable extends Migration
             $table->decimal('price',7,2);
             $table->text('description');
 
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
         });
     }
 
