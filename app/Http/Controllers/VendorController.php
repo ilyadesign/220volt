@@ -56,7 +56,7 @@ class VendorController extends Controller
      */
     public function show(Request $request,Vendor $vendor, $n)
     {
-        // Вывод производителей, имеющих > N товаров
+        //
         $vendors = DB::select('SELECT * FROM vendors LEFT JOIN goods ON vendors.id=goods.vendor_id HAVING COUNT(goods.vendor_id) > ? GROUP BY vendors.id', $n);
         return view('index', ['vendors' => $vendors]);
     }
